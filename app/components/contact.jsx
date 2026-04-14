@@ -13,6 +13,9 @@ export default function NewMoneyContact({ data }) {
   const [status, setStatus] = useState("idle");
   const [focused, setFocused] = useState(null);
 
+  const hasContact = !!(data?.email || data?.github || data?.linkedin || data?.twitter || data?.website || data?.web3forms_key);
+  if (!hasContact) return null;
+
   const WEB3FORMS_KEY = data?.web3forms_key || process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "";
 
   const handleSubmit = async (e) => {
