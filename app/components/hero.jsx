@@ -34,7 +34,7 @@ export default function NewMoneyHero({ data }) {
     }}>
       {/* Background red diagonal */}
       {hasPhoto && (
-        <div style={{
+        <div className="nm-bg-panel" style={{
           position: "absolute", top: 0, right: 0,
           width: "42%", height: "100%",
           background: "#0f0f0f",
@@ -58,7 +58,23 @@ export default function NewMoneyHero({ data }) {
         NEW MONEY
       </div>
 
-      <style>{`@media(max-width:768px){.nm-hero-grid{grid-template-columns:1fr!important;padding:3rem 1.5rem 7rem!important;gap:2rem!important;} .nm-cta-row{flex-direction:column!important;} .nm-cta-row a,.nm-cta-row button{width:100%!important;justify-content:center!important;}}`}</style>
+      <style>{`
+        @media(max-width:768px){
+          .nm-hero-grid { grid-template-columns: 1fr !important; padding: 2.5rem 1.25rem 5rem !important; gap: 2rem !important; }
+          .nm-name-word { font-size: clamp(3rem, 14vw, 5rem) !important; }
+          .nm-slogan { max-width: 100% !important; font-size: 14px !important; }
+          .nm-cta-row { flex-direction: column !important; gap: 10px !important; }
+          .nm-cta-row button, .nm-cta-row a { width: 100% !important; justify-content: center !important; text-align: center !important; }
+          .nm-stats { flex-wrap: wrap !important; gap: 1.5rem 0 !important; }
+          .nm-stat-item { padding-right: 1.5rem !important; margin-right: 1.5rem !important; min-width: 80px !important; }
+          .nm-photo-wrap { min-height: 300px !important; max-height: 420px !important; }
+          .nm-bg-panel { display: none !important; }
+          .nm-badge span { letter-spacing: 0.12em !important; font-size: 9px !important; }
+        }
+        @media(max-width:400px){
+          .nm-name-word { font-size: clamp(2.6rem, 15vw, 3.5rem) !important; }
+        }
+      `}</style>
       <div className="nm-hero-grid" style={{
         maxWidth: "1400px", margin: "0 auto",
         padding: "5rem 3rem", width: "100%",
@@ -71,6 +87,7 @@ export default function NewMoneyHero({ data }) {
         <div>
           {/* Status badge */}
           <motion.div
+            className="nm-badge"
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -93,6 +110,7 @@ export default function NewMoneyHero({ data }) {
             {nameParts.map((word, i) => (
               <motion.div
                 key={i}
+                className="nm-name-word"
                 initial={{ opacity: 0, x: -60 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 + i * 0.1, ease: [0.25, 1, 0.5, 1] }}
@@ -114,6 +132,7 @@ export default function NewMoneyHero({ data }) {
           {/* Quote / slogan */}
           {(data?.sloganHeroSection || data?.bio) && (
             <motion.p
+              className="nm-slogan"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -134,6 +153,7 @@ export default function NewMoneyHero({ data }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
+            className="nm-cta-row"
             style={{ display: "flex", flexWrap: "wrap", gap: "14px", alignItems: "center", marginBottom: "3.5rem" }}
           >
             <button onClick={() => scrollTo("contact")}
@@ -188,10 +208,11 @@ export default function NewMoneyHero({ data }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.75 }}
+              className="nm-stats"
               style={{ display: "flex", gap: "0", borderTop: "1px solid #1a1a1a", paddingTop: "2rem" }}
             >
               {stats.map((stat, i) => (
-                <div key={i} style={{
+                <div key={i} className="nm-stat-item" style={{
                   paddingRight: "2.5rem", marginRight: "2.5rem",
                   borderRight: i < stats.length - 1 ? "1px solid #1a1a1a" : "none",
                 }}>
@@ -229,7 +250,7 @@ export default function NewMoneyHero({ data }) {
               height: "4px", background: RED, zIndex: 2,
             }} />
 
-            <div style={{
+            <div className="nm-photo-wrap" style={{
               overflow: "hidden",
               height: "100%", minHeight: "500px",
               border: "1px solid #1a1a1a",
