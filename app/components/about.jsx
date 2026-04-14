@@ -9,6 +9,7 @@ const WHITE = "#fafafa";
 const GREY  = "#888888";
 
 export default function NewMoneyAbout({ data }) {
+  if (!data) return null;
   const skills = data?.skills || [];
   const flatSkills = skills.flatMap?.((s) =>
     typeof s === "object" && s.items ? s.items : [s]
